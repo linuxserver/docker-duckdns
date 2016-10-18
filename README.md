@@ -8,4 +8,4 @@ If you want to comment\contribute on this container , are looking for support on
 * [IRC](https://www.linuxserver.io/irc/) on freenode at `#linuxserver.io`
 * [Podcast](https://www.linuxserver.io/podcast/) covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
-BLAH SOME MORE BLAH TESTING OF THE BLAH SYNC BLAH THIS SHOULD FAIL
+BLAH SOME MORE BLAH TESTING OF THE BLAH SYNC BLAH THIS SHOULD PASS
