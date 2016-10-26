@@ -9,7 +9,7 @@ else
   echo -e "SUBDOMAINS=$SUBDOMAINS TOKEN=$TOKEN" > /app/duck.conf
 fi
 
-# set crontab
+# modify crontab if logging to file
 if [ $LOG_FILE = "true" ]; then
   crontab -u abc /defaults/duckcron
 fi
