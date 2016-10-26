@@ -16,7 +16,8 @@ fi
 
 # permissions
 chown -R abc:abc \
-	/app
+	/app \
+	/config
 chmod +x /app/duck.sh
 
 # run initial IP update
