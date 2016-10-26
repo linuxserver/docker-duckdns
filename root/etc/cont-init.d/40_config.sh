@@ -12,6 +12,9 @@ fi
 # modify crontab if logging to file
 if [ "$LOG_FILE" = "true" ]; then
   crontab -u abc /defaults/duckcron
+  echo "log will be output to file"
+else
+  echo "log will be output to docker log"
 fi
 
 # permissions
