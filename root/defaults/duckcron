@@ -1,1 +1,1 @@
-*/5 * * * * /app/duck.sh 2>&1
+*/5 * * * * /app/duck.sh 2>&1 > /config/duck.log

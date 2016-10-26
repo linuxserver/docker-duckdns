@@ -9,12 +9,15 @@ else
   echo -e "SUBDOMAINS=$SUBDOMAINS TOKEN=$TOKEN" > /app/duck.conf
 fi
 
-# set crontab
-crontab -u abc /defaults/duckcron
+# modify crontab if logging to file
+if [ $LOG_FILE = "true" ]; then
+  crontab -u abc /defaults/duckcron
+fi
 
 # permissions
 chown -R abc:abc \
-	/app
+	/app \
+	/config
 chmod +x /app/duck.sh
 
 # run initial IP update
