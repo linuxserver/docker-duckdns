@@ -10,7 +10,9 @@ else
 fi
 
 # set crontab
-crontab -u abc /defaults/duckcron
+if [ $LOG_FILE = "true" ]; then
+  crontab -u abc /defaults/duckcron
+fi
 
 # permissions
 chown -R abc:abc \
