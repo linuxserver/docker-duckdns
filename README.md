@@ -27,6 +27,7 @@ docker create \
   -e PGID=<gid> -e PUID=<uid>  \
   -e SUBDOMAINS=<subdomains> \
   -e TOKEN=<token> \
+  -e TZ=<timezone> \
   linuxserver/duckdns
 ```
 
@@ -42,6 +43,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PUID` for UserID - see below for explanation
 * `-e SUBDOMAINS` for subdomains - multiple subdomains allowed, comma separated, no spaces
 * `-e TOKEN` for DuckDNS token
+* `-e TZ` for timezone information, eg Europe/London
 * optional `-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log
 * optional `-v <path to data>:/config` used in conjunction with logging to file
 
