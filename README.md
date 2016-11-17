@@ -42,6 +42,8 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PUID` for UserID - see below for explanation
 * `-e SUBDOMAINS` for subdomains - multiple subdomains allowed, comma separated, no spaces
 * `-e TOKEN` for DuckDNS token
+* optional `-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log
+* optional `-v <path to data>:/config` used in conjunction with logging to file
 
 
 ### User / Group Identifiers
@@ -60,6 +62,8 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 First, go to [duckdns site][duckurl], register your subdomain and retrieve your token  
 Then run the docker create command above with your subdomain(s) and token  
 It will update your IP with the DuckDNS service every 5 minutes  
+
+If you'd like the output in a file, set the optional parameter LOG_FILE to true and map a volume for /config  
 
 
 ## Info
