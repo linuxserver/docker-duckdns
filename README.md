@@ -16,7 +16,7 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 
 Duck DNS is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.
 
-[![duckdns](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duck.png)][duckurl]
+[![duckdns](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png)][duckurl]
 [duckurl]: http://www.duckdns.org/
 
 ## Usage
