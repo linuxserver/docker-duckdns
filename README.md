@@ -16,6 +16,9 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 
 Duck DNS is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.
 
+[![duckdns](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duck.png)][duckurl]
+[duckurl]: http://www.duckdns.org/
+
 ## Usage
 
 ```
@@ -54,7 +57,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Setting up the application
 
-First, go to www.duckdns.org, register your subdomain and retrieve your token  
+First, go to [duckdns site][duckurl], register your subdomain and retrieve your token  
 Then run the docker create command above with your subdomain(s) and token  
 It will update your IP with the DuckDNS service every 5 minutes  
 
