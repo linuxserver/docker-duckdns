@@ -2,6 +2,8 @@
 [forumurl]: https://forum.linuxserver.io
 [ircurl]: https://www.linuxserver.io/irc/
 [podcasturl]: https://www.linuxserver.io/podcast/
+[appurl]: http://www.duckdns.org/
+[hub]: https://hub.docker.com/r/linuxserver/duckdns/
 
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
@@ -12,12 +14,10 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 
 # linuxserver/duckdns
 [![](https://images.microbadger.com/badges/version/linuxserver/duckdns.svg)](https://microbadger.com/images/linuxserver/duckdns "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/duckdns.svg)](https://microbadger.com/images/linuxserver/duckdns "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/duckdns.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/duckdns.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-duckdns)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-duckdns/)
-[hub]: https://hub.docker.com/r/linuxserver/duckdns/
 
 Duck DNS is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.
 
-[![duckdns](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png)][duckurl]
-[duckurl]: http://www.duckdns.org/
+[![duckdns](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png)][appurl]
 
 ## Usage
 
@@ -61,7 +61,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Setting up the application
 
-First, go to [duckdns site][duckurl], register your subdomain and retrieve your token  
+First, go to [duckdns site][appurl], register your subdomain and retrieve your token  
 Then run the docker create command above with your subdomain(s) and token  
 It will update your IP with the DuckDNS service every 5 minutes  
 
