@@ -83,6 +83,7 @@ If you'd like the output in a file, set the optional parameter LOG_FILE to true 
 
 ## Versions
 
++ **22.08.18:** Rebase to alpine 3.8.
 + **08.12.17:** Rebase to alpine 3.7.
 + **28.05.17:** Rebase to alpine 3.6.
 + **09.02.17:** Rebase to alpine 3.5.
