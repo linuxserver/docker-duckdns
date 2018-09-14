@@ -57,11 +57,9 @@ docker create \
   linuxserver/DuckDNS
 ```
 
-```
 Optional parameters:
--e LOG_FILE=true #if you prefer the duckdns log to be written to a file instead of the docker log
--v <path to data>:/config #used in conjunction with logging to file
-```
+`-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log
+`-v <path to data>:/config` used in conjunction with logging to file
 
 ### docker-compose
 
@@ -112,7 +110,7 @@ Container images are configured using parameters passed at runtime (such as thos
 
 ## Versions
 
-* **29.08.18:** - Multi-arch image.
+* **13.09.18:** - Multi-arch image.
 * **22.08.18:** - Rebase to alpine 3.8.
 * **08.12.17:** - Rebase to alpine 3.7.
 * **28.05.17:** - Rebase to alpine 3.6.

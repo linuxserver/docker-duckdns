@@ -85,16 +85,14 @@ pipeline {
     /* ########################
        External Release Tagging
        ######################## */
-    // If this is a pip version change set the external release verison and link
-    stage("Set ENV pip_version"){
-      steps{
-        script{
-          env.EXT_RELEASE = sh(
-            script: '''curl -sL  https://pypi.python.org/pypi/${EXT_PIP}/json |jq -r '. | .info.version' ''',
-            returnStdout: true).trim()
-          env.RELEASE_LINK = 'https://pypi.python.org/pypi/' + env.EXT_PIP
-        }
-      }
+    // If this is an os release set release type to none to indicate no external release
+    stage("Set ENV os"){
+     steps{
+       script{
+         env.EXT_RELEASE = env.PACKAGE_TAG
+         env.RELEASE_LINK = 'none'
+       }
+     }
     }
     // If this is a master build use live docker endpoints
     stage("Set ENV live build"){
@@ -421,11 +419,11 @@ pipeline {
              "tagger": {"name": "LinuxServer Jenkins","email": "jenkins@linuxserver.io","date": "'${GITHUB_DATE}'"}}' '''
         echo "Pushing New release for Tag"
         sh '''#! /bin/bash
-              echo "Updating PIP version of ${EXT_PIP} to ${EXT_RELEASE}" > releasebody.json
+              echo "Updating base packages to ${PACKAGE_TAG}" > releasebody.json
               echo '{"tag_name":"'${EXT_RELEASE}'-pkg-'${PACKAGE_TAG}'-ls'${LS_TAG_NUMBER}'",\
                      "target_commitish": "master",\
                      "name": "'${EXT_RELEASE}'-pkg-'${PACKAGE_TAG}'-ls'${LS_TAG_NUMBER}'",\
-                     "body": "**LinuxServer Changes:**\\n\\n'${LS_RELEASE_NOTES}'\\n**PIP Changes:**\\n\\n' > start
+                     "body": "**LinuxServer Changes:**\\n\\n'${LS_RELEASE_NOTES}'\\n**OS Changes:**\\n\\n' > start
               printf '","draft": false,"prerelease": false}' >> releasebody.json
               paste -d'\\0' start releasebody.json > releasebody.json.done
               curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST https://api.github.com/repos/${LS_USER}/${LS_REPO}/releases -d @releasebody.json.done'''
@@ -451,7 +449,7 @@ pipeline {
                   -e DOCKERHUB_USERNAME=$DOCKERUSER \
                   -e DOCKERHUB_PASSWORD=$DOCKERPASS \
                   -e GIT_REPOSITORY=${LS_USER}/${LS_REPO} \
-                  -e DOCKER_REPOSITORY=${DOCKERHUB_IMAGE} \
+                  -e DOCKER_REPOSITORY=${IMAGE} \
                   -e GIT_BRANCH=master \
                   lsiodev/readme-sync bash -c 'node sync' '''
         }
