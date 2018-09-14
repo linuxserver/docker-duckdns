@@ -29,11 +29,9 @@ param_env_vars:
 # optional parameters
 optional_block_1: true
 optional_block_1_items:
-  - "```"
   - "Optional parameters:"
-  - "-e LOG_FILE=true #if you prefer the duckdns log to be written to a file instead of the docker log"
-  - "-v <path to data>:/config #used in conjunction with logging to file"
-  - "```"
+  - "`-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log"
+  - "`-v <path to data>:/config` used in conjunction with logging to file"
 
 # application setup block
 app_setup_block_enabled: true
