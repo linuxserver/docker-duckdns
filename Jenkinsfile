@@ -21,7 +21,7 @@ pipeline {
     CI_WEB='false'
     CI_PORT=''
     CI_SSL=''
-    CI_DELAY=''
+    CI_DELAY='5'
     CI_DOCKERENV='TZ=US/Pacific'
     CI_AUTH=''
     CI_WEBPATH=''
