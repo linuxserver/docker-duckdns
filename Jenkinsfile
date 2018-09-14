@@ -22,7 +22,7 @@ pipeline {
     CI_PORT=''
     CI_SSL=''
     CI_DELAY='5'
-    CI_DOCKERENV='TZ=US/Pacific'
+    CI_DOCKERENV='SUBDOMAINS=testing|TOKEN=testing'
     CI_AUTH=''
     CI_WEBPATH=''
   }
