@@ -1,7 +1,7 @@
 ---
 
 # project information
-project_name: DuckDNS
+project_name: duckdns
 project_url: "https://duckdns.org/"
 project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png"
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence."
@@ -29,8 +29,10 @@ param_env_vars:
 # optional parameters
 optional_block_1: true
 optional_block_1_items:
-  - "Optional parameters:"
+  - "### Optional parameters:"
+  - ""
   - "`-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log"
+  - ""
   - "`-v <path to data>:/config` used in conjunction with logging to file"
 
 # application setup block

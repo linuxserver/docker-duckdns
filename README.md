@@ -20,15 +20,15 @@ From August 2018 onwards, Linuxserver are in the midst of switching to a new CI 
 
 TLDR: Multi-arch support is changing from multiple repos to one repo per container image.
 
-# [linuxserver/DuckDNS](https://github.com/linuxserver/docker-DuckDNS)
-[![](https://images.microbadger.com/badges/version/linuxserver/DuckDNS.svg)](https://microbadger.com/images/linuxserver/DuckDNS "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/linuxserver/DuckDNS.svg)](https://microbadger.com/images/linuxserver/DuckDNS "Get your own version badge on microbadger.com")
-![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/DuckDNS.svg)
-![Docker Stars](https://img.shields.io/docker/stars/linuxserver/DuckDNS.svg)
+# [linuxserver/duckdns](https://github.com/linuxserver/docker-duckdns)
+[![](https://images.microbadger.com/badges/version/linuxserver/duckdns.svg)](https://microbadger.com/images/linuxserver/duckdns "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/linuxserver/duckdns.svg)](https://microbadger.com/images/linuxserver/duckdns "Get your own version badge on microbadger.com")
+![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/duckdns.svg)
+![Docker Stars](https://img.shields.io/docker/stars/linuxserver/duckdns.svg)
 
 [Duckdns](https://duckdns.org/) is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.
 
-[![DuckDNS](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png)](https://duckdns.org/)
+[![duckdns](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png)](https://duckdns.org/)
 
 ## Supported Architectures
 
@@ -50,15 +50,17 @@ Here are some example snippets to help you get started creating a container.
 
 ```
 docker create \
-  --name=DuckDNS \
+  --name=duckdns \
   -e TZ=Europe/London \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
-  linuxserver/DuckDNS
+  linuxserver/duckdns
 ```
 
-Optional parameters:
+### Optional parameters:
+
 `-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log
+
 `-v <path to data>:/config` used in conjunction with logging to file
 
 ### docker-compose
@@ -69,9 +71,9 @@ Compatible with docker-compose v2 schemas.
 ---
 version: "2"
 services:
-  DuckDNS:
-    image: linuxserver/DuckDNS
-    container_name: DuckDNS
+  duckdns:
+    image: linuxserver/duckdns
+    container_name: duckdns
       - TZ=Europe/London
       - SUBDOMAINS=subdomain1,subdomain2
       - TOKEN=token
@@ -101,12 +103,12 @@ Container images are configured using parameters passed at runtime (such as thos
 
 ## Support Info
 
-* Shell access whilst the container is running: `docker exec -it DuckDNS /bin/bash`
-* To monitor the logs of the container in realtime: `docker logs -f DuckDNS`
+* Shell access whilst the container is running: `docker exec -it duckdns /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f duckdns`
 * container version number 
-  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' DuckDNS`
+  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' duckdns`
 * image version number
-  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/DuckDNS`
+  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/duckdns`
 
 ## Versions
 
