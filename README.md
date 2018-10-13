@@ -110,7 +110,7 @@ Container images are configured using parameters passed at runtime (such as thos
 
 ## Versions
 
-* **13.09.18:** - Multi-arch image.
+* **15.10.18:** - Multi-arch image.
 * **22.08.18:** - Rebase to alpine 3.8.
 * **08.12.17:** - Rebase to alpine 3.7.
 * **28.05.17:** - Rebase to alpine 3.6.

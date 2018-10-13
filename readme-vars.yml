@@ -42,7 +42,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
-  - { date: "13.09.18:", desc: "Multi-arch image." }
+  - { date: "15.10.18:", desc: "Multi-arch image." }
   - { date: "22.08.18:", desc: "Rebase to alpine 3.8." }
   - { date: "08.12.17:", desc: "Rebase to alpine 3.7." }
   - { date: "28.05.17:", desc: "Rebase to alpine 3.6." }
