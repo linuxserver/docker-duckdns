@@ -57,10 +57,8 @@ docker create \
   linuxserver/duckdns
 ```
 
-### Optional parameters:
-
+### optional parameters
 `-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log
-
 `-v <path to data>:/config` used in conjunction with logging to file
 
 ### docker-compose
