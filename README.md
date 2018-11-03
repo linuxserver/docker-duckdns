@@ -21,6 +21,7 @@ From August 2018 onwards, Linuxserver are in the midst of switching to a new CI 
 TLDR: Multi-arch support is changing from multiple repos to one repo per container image.
 
 # [linuxserver/duckdns](https://github.com/linuxserver/docker-duckdns)
+[![](https://img.shields.io/discord/354974912613449730.svg?logo=discord&label=LSIO%20Discord&style=flat-square)](https://discord.gg/YWrKVTn)
 [![](https://images.microbadger.com/badges/version/linuxserver/duckdns.svg)](https://microbadger.com/images/linuxserver/duckdns "Get your own version badge on microbadger.com")
 [![](https://images.microbadger.com/badges/image/linuxserver/duckdns.svg)](https://microbadger.com/images/linuxserver/duckdns "Get your own version badge on microbadger.com")
 ![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/duckdns.svg)
@@ -54,6 +55,7 @@ docker create \
   -e TZ=Europe/London \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
+  --restart unless-stopped
   linuxserver/duckdns
 ```
 
