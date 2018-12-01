@@ -55,7 +55,7 @@ docker create \
   -e TZ=Europe/London \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
-  --restart unless-stopped
+  --restart unless-stopped \
   linuxserver/duckdns
 ```
 
