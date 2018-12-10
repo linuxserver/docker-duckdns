@@ -74,6 +74,7 @@ services:
   duckdns:
     image: linuxserver/duckdns
     container_name: duckdns
+    environment:
       - TZ=Europe/London
       - SUBDOMAINS=subdomain1,subdomain2
       - TOKEN=token
@@ -112,6 +113,7 @@ Container images are configured using parameters passed at runtime (such as thos
 
 ## Versions
 
+* **10.12.18:** - Fix docker compose example.
 * **15.10.18:** - Multi-arch image.
 * **22.08.18:** - Rebase to alpine 3.8.
 * **08.12.17:** - Rebase to alpine 3.7.
