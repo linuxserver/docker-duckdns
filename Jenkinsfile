@@ -17,8 +17,6 @@ pipeline {
     DOCKERHUB_IMAGE = 'linuxserver/duckdns'
     DEV_DOCKERHUB_IMAGE = 'lsiodev/duckdns'
     PR_DOCKERHUB_IMAGE = 'lspipepr/duckdns'
-    BUILDS_DISCORD = credentials('build_webhook_url')
-    GITHUB_TOKEN = credentials('498b4638-2d02-4ce5-832d-8a57d01d97ab')
     DIST_IMAGE = 'alpine'
     MULTIARCH='true'
     CI='true'
@@ -325,9 +323,9 @@ pipeline {
               fi
               if [ "$(md5sum ${TEMPDIR}/package_versions.txt | cut -c1-8 )" != "${PACKAGE_TAG}" ]; then
                 git clone https://github.com/${LS_USER}/${LS_REPO}.git ${TEMPDIR}/${LS_REPO}
+                git --git-dir ${TEMPDIR}/${LS_REPO}/.git checkout -f master
                 cp ${TEMPDIR}/package_versions.txt ${TEMPDIR}/${LS_REPO}/
                 cd ${TEMPDIR}/${LS_REPO}/
-                git --git-dir ${TEMPDIR}/${LS_REPO}/.git checkout -f master
                 git --git-dir ${TEMPDIR}/${LS_REPO}/.git add package_versions.txt
                 git --git-dir ${TEMPDIR}/${LS_REPO}/.git commit -m 'Bot Updating Package Versions'
                 git --git-dir ${TEMPDIR}/${LS_REPO}/.git push https://LinuxServer-CI:${GITHUB_TOKEN}@github.com/${LS_USER}/${LS_REPO}.git --all
