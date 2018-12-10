@@ -42,6 +42,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "10.12.18:", desc: "Fix docker compose example." }
   - { date: "15.10.18:", desc: "Multi-arch image." }
   - { date: "22.08.18:", desc: "Rebase to alpine 3.8." }
   - { date: "08.12.17:", desc: "Rebase to alpine 3.7." }
