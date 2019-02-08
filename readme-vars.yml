@@ -13,25 +13,47 @@ available_architectures:
   - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
   - { arch: "{{ arch_armhf }}", tag: "arm32v6-latest"}
 
+# development version
+development_versions: false
+development_versions_items: ""
+
 # container parameters
-common_param_env_vars_enabled: false
+common_param_env_vars_enabled: 'optional' #PGID, PUID, etc, you can set it to 'optional'
 param_container_name: "{{ project_name }}"
-param_usage_include_vols: false
-param_volumes: ""
-param_usage_include_ports: false
-param_ports: ""
+param_usage_include_net: false #you can set it to 'optional'
+param_net: ""
+param_net_desc: ""
 param_usage_include_env: true
 param_env_vars:
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London"}
   - { env_var: "SUBDOMAINS", env_value: "subdomain1,subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces"}
   - { env_var: "TOKEN", env_value: "token", desc: "DuckDNS token"}
+param_usage_include_vols: false
+param_volumes: ""
+param_usage_include_ports: false
+param_ports: ""
+param_device_map: false
+param_devices: ""
+cap_add_param: false
+cap_add_param_vars: ""
+
+# optional container parameters
+opt_param_usage_include_env: true
+opt_param_env_vars:
+  - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config)."}
+opt_param_usage_include_vols: true
+opt_param_volumes:
+  - { vol_path: "/config", vol_host_path: "</path/to/appdata/config>", desc: "Used in conjunction with logging to file." }
+opt_param_usage_include_ports: false
+opt_param_ports: ""
+opt_param_device_map: false
+opt_param_devices: ""
+opt_cap_add_param: false
+opt_cap_add_param_vars: ""
 
 # optional parameters
-optional_block_1: true
-optional_block_1_items:
-  - "### optional parameters"
-  - "`-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log  "
-  - "`-v <path to data>:/config` used in conjunction with logging to file"
+optional_block_1: false
+optional_block_1_items: ""
 
 # application setup block
 app_setup_block_enabled: true
@@ -42,6 +64,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "08.02.19:", desc: "Update readme with optional parameters." }
   - { date: "10.12.18:", desc: "Fix docker compose example." }
   - { date: "15.10.18:", desc: "Multi-arch image." }
   - { date: "22.08.18:", desc: "Rebase to alpine 3.8." }

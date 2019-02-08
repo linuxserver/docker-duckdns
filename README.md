@@ -26,6 +26,8 @@ TLDR: Multi-arch support is changing from multiple repos to one repo per contain
 [![](https://images.microbadger.com/badges/image/linuxserver/duckdns.svg)](https://microbadger.com/images/linuxserver/duckdns "Get your own version badge on microbadger.com")
 ![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/duckdns.svg)
 ![Docker Stars](https://img.shields.io/docker/stars/linuxserver/duckdns.svg)
+[![Build Status](https://ci.linuxserver.io/buildStatus/icon?job=Docker-Pipeline-Builders/docker-duckdns/master)](https://ci.linuxserver.io/job/Docker-Pipeline-Builders/job/docker-duckdns/job/master/)
+[![](https://lsio-ci.ams3.digitaloceanspaces.com/linuxserver/duckdns/latest/badge.svg)](https://lsio-ci.ams3.digitaloceanspaces.com/linuxserver/duckdns/latest/index.html)
 
 [Duckdns](https://duckdns.org/) is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.
 
@@ -35,6 +37,8 @@ TLDR: Multi-arch support is changing from multiple repos to one repo per contain
 
 Our images support multiple architectures such as `x86-64`, `arm64` and `armhf`. We utilise the docker manifest for multi-platform awareness. More information is available from docker [here](https://github.com/docker/distribution/blob/master/docs/spec/manifest-v2-2.md#manifest-list). 
 
+Simply pulling `linuxserver/duckdns` should retrieve the correct image for your arch, but you can also pull specific arch images via tags.
+
 The architectures supported by this image are:
 
 | Architecture | Tag |
@@ -42,6 +46,7 @@ The architectures supported by this image are:
 | x86-64 | amd64-latest |
 | arm64 | arm64v8-latest |
 | armhf | arm32v6-latest |
+
 
 ## Usage
 
@@ -52,16 +57,17 @@ Here are some example snippets to help you get started creating a container.
 ```
 docker create \
   --name=duckdns \
+  -e PUID=1001 `#optional` \
+  -e PGID=1001 `#optional` \
   -e TZ=Europe/London \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
+  -e LOG_FILE=false `#optional` \
+  -v </path/to/appdata/config>:/config `#optional` \
   --restart unless-stopped \
   linuxserver/duckdns
 ```
 
-### optional parameters
-`-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log  
-`-v <path to data>:/config` used in conjunction with logging to file
 
 ### docker-compose
 
@@ -75,9 +81,14 @@ services:
     image: linuxserver/duckdns
     container_name: duckdns
     environment:
+      - PUID=1001 #optional
+      - PGID=1001 #optional
       - TZ=Europe/London
       - SUBDOMAINS=subdomain1,subdomain2
       - TOKEN=token
+      - LOG_FILE=false #optional
+    volumes:
+      - </path/to/appdata/config>:/config #optional
     mem_limit: 4096m
     restart: unless-stopped
 ```
@@ -88,10 +99,28 @@ Container images are configured using parameters passed at runtime (such as thos
 
 | Parameter | Function |
 | :----: | --- |
+| `-e PUID=1001` | for UserID - see below for explanation |
+| `-e PGID=1001` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
 | `-e SUBDOMAINS=subdomain1,subdomain2` | multiple subdomains allowed, comma separated, no spaces |
 | `-e TOKEN=token` | DuckDNS token |
+| `-e LOG_FILE=false` | Set to `true` to log to file (also need to map /config). |
+| `-v /config` | Used in conjunction with logging to file. |
 
+## User / Group Identifiers
+
+When using volumes (`-v` flags) permissions issues can arise between the host OS and the container, we avoid this issue by allowing you to specify the user `PUID` and group `PGID`.
+
+Ensure any volume directories on the host are owned by the same user you specify and any permissions issues will vanish like magic.
+
+In this instance `PUID=1001` and `PGID=1001`, to find yours use `id user` as below:
+
+```
+  $ id username
+    uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
+```
+
+You only need to set the PUID and PGID variables if you are mounting the /config folder
 
 &nbsp;
 ## Application Setup
@@ -111,8 +140,28 @@ Container images are configured using parameters passed at runtime (such as thos
 * image version number
   * `docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/duckdns`
 
+## Updating Info
+
+Most of our images are static, versioned, and require an image update and container recreation to update the app inside. With some exceptions (ie. nextcloud, plex), we do not recommend or support updating apps inside the container. Please consult the [Application Setup](#application-setup) section above to see if it is recommended for the image.  
+  
+Below are the instructions for updating containers:  
+  
+### Via Docker Run/Create
+* Update the image: `docker pull linuxserver/duckdns`
+* Stop the running container: `docker stop duckdns`
+* Delete the container: `docker rm duckdns`
+* Recreate a new container with the same docker create parameters as instructed above (if mapped correctly to a host folder, your `/config` folder and settings will be preserved)
+* Start the new container: `docker start duckdns`
+* You can also remove the old dangling images: `docker image prune`
+
+### Via Docker Compose
+* Update the image: `docker-compose pull linuxserver/duckdns`
+* Let compose update containers as necessary: `docker-compose up -d`
+* You can also remove the old dangling images: `docker image prune`
+
 ## Versions
 
+* **08.02.19:** - Update readme with optional parameters.
 * **10.12.18:** - Fix docker compose example.
 * **15.10.18:** - Multi-arch image.
 * **22.08.18:** - Rebase to alpine 3.8.
