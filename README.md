@@ -57,16 +57,17 @@ Here are some example snippets to help you get started creating a container.
 ```
 docker create \
   --name=duckdns \
+  -e PUID=1001 `#optional` \
+  -e PGID=1001 `#optional` \
   -e TZ=Europe/London \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
+  -e LOG_FILE=false `#optional` \
+  -v </path/to/appdata/config>:/config `#optional` \
   --restart unless-stopped \
   linuxserver/duckdns
 ```
 
-### optional parameters
-`-e LOG_FILE=true` if you prefer the duckdns log to be written to a file instead of the docker log  
-`-v <path to data>:/config` used in conjunction with logging to file
 
 ### docker-compose
 
@@ -80,9 +81,14 @@ services:
     image: linuxserver/duckdns
     container_name: duckdns
     environment:
+      - PUID=1001 #optional
+      - PGID=1001 #optional
       - TZ=Europe/London
       - SUBDOMAINS=subdomain1,subdomain2
       - TOKEN=token
+      - LOG_FILE=false #optional
+    volumes:
+      - </path/to/appdata/config>:/config #optional
     mem_limit: 4096m
     restart: unless-stopped
 ```
@@ -93,10 +99,28 @@ Container images are configured using parameters passed at runtime (such as thos
 
 | Parameter | Function |
 | :----: | --- |
+| `-e PUID=1001` | for UserID - see below for explanation |
+| `-e PGID=1001` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
 | `-e SUBDOMAINS=subdomain1,subdomain2` | multiple subdomains allowed, comma separated, no spaces |
 | `-e TOKEN=token` | DuckDNS token |
+| `-e LOG_FILE=false` | Set to `true` to log to file (also need to map /config). |
+| `-v /config` | Used in conjunction with logging to file. |
 
+## User / Group Identifiers
+
+When using volumes (`-v` flags) permissions issues can arise between the host OS and the container, we avoid this issue by allowing you to specify the user `PUID` and group `PGID`.
+
+Ensure any volume directories on the host are owned by the same user you specify and any permissions issues will vanish like magic.
+
+In this instance `PUID=1001` and `PGID=1001`, to find yours use `id user` as below:
+
+```
+  $ id username
+    uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
+```
+
+You only need to set the PUID and PGID variables if you are mounting the /config folder
 
 &nbsp;
 ## Application Setup
@@ -137,6 +161,7 @@ Below are the instructions for updating containers:
 
 ## Versions
 
+* **08.02.19:** - Update readme with optional parameters.
 * **10.12.18:** - Fix docker compose example.
 * **15.10.18:** - Multi-arch image.
 * **22.08.18:** - Rebase to alpine 3.8.
