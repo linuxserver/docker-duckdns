@@ -161,6 +161,7 @@ Below are the instructions for updating containers:
 
 ## Versions
 
+* **22.02.19:** - Rebasing to alpine 3.9.
 * **08.02.19:** - Update readme with optional parameters.
 * **10.12.18:** - Fix docker compose example.
 * **15.10.18:** - Multi-arch image.
