@@ -64,6 +64,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "22.02.19:", desc: "Rebasing to alpine 3.9." }
   - { date: "08.02.19:", desc: "Update readme with optional parameters." }
   - { date: "10.12.18:", desc: "Fix docker compose example." }
   - { date: "15.10.18:", desc: "Multi-arch image." }
