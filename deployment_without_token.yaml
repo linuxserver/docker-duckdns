@@ -42,7 +42,7 @@ spec:
           value: <INSERT-TOKEN>
         - name: SUBDOMAINS
           value: <INSERT-DOMAINS>
-        image: linuxserver/duckdns
+        image: marvinmarvin/docker-k8s-duckdns
         imagePullPolicy: Always
         name: duckdns
         resources: {}
