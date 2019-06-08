@@ -6,12 +6,12 @@ busybox-1.29.3-r10
 ca-certificates-20190108-r0
 ca-certificates-cacert-20190108-r0
 coreutils-8.30-r0
-curl-7.64.0-r1
+curl-7.64.0-r2
 libacl-2.2.52-r5
 libattr-2.4.47-r7
 libc-utils-0.7.1-r0
 libcrypto1.1-1.1.1b-r1
-libcurl-7.64.0-r1
+libcurl-7.64.0-r2
 libssh2-1.8.2-r0
 libssl1.1-1.1.1b-r1
 libtls-standalone-2.7.4-r6
