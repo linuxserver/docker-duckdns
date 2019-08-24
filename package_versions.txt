@@ -20,7 +20,7 @@ musl-utils-1.1.22-r3
 ncurses-libs-6.1_p20190518-r0
 ncurses-terminfo-6.1_p20190518-r0
 ncurses-terminfo-base-6.1_p20190518-r0
-nghttp2-libs-1.38.0-r0
+nghttp2-libs-1.39.2-r0
 readline-8.0.0-r0
 scanelf-1.2.3-r0
 shadow-4.6-r2
