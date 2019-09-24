@@ -21,7 +21,6 @@ fi
 chown -R abc:abc \
 	/app \
 	/config
-chmod +x /app/duck.sh
 
 # run initial IP update
 exec \
