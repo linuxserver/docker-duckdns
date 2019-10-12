@@ -2,7 +2,7 @@
 
   #Check to make sure the subdomain and token are set
 if [ -z "$SUBDOMAINS" ] || [ -z "$TOKEN" ]; then
-  echo "Please pass both your subdomain(s) and token as environment variables in your docker run command. See docker info for more details."
+  echo "Please pass both your subdomain(s) and token as environment variables in your docker run command, see docker info for more details."
   exit 1
 else
   echo "Retrieving subdomain and token from the environment variables"
@@ -12,9 +12,9 @@ fi
 # modify crontab if logging to file
 if [ "$LOG_FILE" = "true" ]; then
   crontab -u abc /defaults/duckcron
-  echo "log will be output to file"
+  echo "log output will be written to file"
 else
-  echo "log will be output to docker log"
+  echo "log output will be written to docker log"
 fi
 
 # permissions
