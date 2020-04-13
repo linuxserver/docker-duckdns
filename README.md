@@ -70,7 +70,7 @@ docker create \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
   -e LOG_FILE=false `#optional` \
-  -v </path/to/appdata/config>:/config `#optional` \
+  -v /path/to/appdata/config:/config `#optional` \
   --restart unless-stopped \
   linuxserver/duckdns
 ```
@@ -95,7 +95,7 @@ services:
       - TOKEN=token
       - LOG_FILE=false #optional
     volumes:
-      - </path/to/appdata/config>:/config #optional
+      - /path/to/appdata/config:/config #optional
     restart: unless-stopped
 ```
 
@@ -218,6 +218,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **13.04.20:** - Add donation links for DuckDNS.
 * **19.12.19:** - Rebasing to alpine 3.11.
 * **24.09.19:** - Fix perms on github and remove chmod that can stall the container.
 * **28.06.19:** - Rebasing to alpine 3.10.
