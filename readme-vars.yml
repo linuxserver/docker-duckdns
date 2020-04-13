@@ -43,7 +43,7 @@ opt_param_env_vars:
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config)."}
 opt_param_usage_include_vols: true
 opt_param_volumes:
-  - { vol_path: "/config", vol_host_path: "</path/to/appdata/config>", desc: "Used in conjunction with logging to file." }
+  - { vol_path: "/config", vol_host_path: "/path/to/appdata/config", desc: "Used in conjunction with logging to file." }
 opt_param_usage_include_ports: false
 opt_param_ports: ""
 opt_param_device_map: false
@@ -64,6 +64,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "13.04.20:", desc: "Add donation links for DuckDNS." }
   - { date: "19.12.19:", desc: "Rebasing to alpine 3.11." }
   - { date: "24.09.19:", desc: "Fix perms on github and remove chmod that can stall the container." }
   - { date: "28.06.19:", desc: "Rebasing to alpine 3.10." }

@@ -24,3 +24,5 @@ repo_vars:
   - CI_DOCKERENV='SUBDOMAINS=testing|TOKEN=testing'
   - CI_AUTH=''
   - CI_WEBPATH=''
+sponsor_links:
+  - { name: "DuckDNS", url: "https://www.patreon.com/user?u=3209735" }
