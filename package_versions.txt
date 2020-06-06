@@ -21,7 +21,7 @@ musl-1.1.24-r8
 musl-utils-1.1.24-r8
 ncurses-libs-6.2_p20200523-r0
 ncurses-terminfo-base-6.2_p20200523-r0
-nghttp2-libs-1.40.0-r0
+nghttp2-libs-1.41.0-r0
 procps-3.3.16-r0
 readline-8.0.4-r0
 scanelf-1.2.6-r0
