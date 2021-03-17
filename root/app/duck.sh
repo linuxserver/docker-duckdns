@@ -3,7 +3,7 @@
 . /app/duck.conf
 RESPONSE=`curl -s "https://www.duckdns.org/update?domains=$SUBDOMAINS&token=$TOKEN&ip="`
 if [ "$RESPONSE" = "OK" ]; then
-echo "Your IP was updated at "$(date)
+  echo "The IP(s) $SUBDOMAINS were updated at "$(date)
 else
-echo "Something went wrong, please check your settings  "$(date)
+  echo "Something went wrong, please check your settings  "$(date)
 fi
