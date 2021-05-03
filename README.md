@@ -231,6 +231,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **03.05.21:** - Re-adjust cron timings to prevent peak times, update code formatting.
 * **23.01.21:** - Rebasing to alpine 3.13.
 * **01.06.20:** - Rebasing to alpine 3.12.
 * **13.04.20:** - Add donation links for DuckDNS.
