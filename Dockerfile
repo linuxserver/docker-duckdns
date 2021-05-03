@@ -11,9 +11,9 @@ LABEL maintainer="aptalca"
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 RUN \
- echo "**** install packages ****" && \
- apk add --no-cache \
-	curl
+  echo "**** install packages ****" && \
+  apk add --no-cache \
+    curl
 
 # add local files
 COPY root/ /
