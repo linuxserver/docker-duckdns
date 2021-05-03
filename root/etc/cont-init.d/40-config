@@ -6,7 +6,7 @@ if [ -z "$SUBDOMAINS" ] || [ -z "$TOKEN" ]; then
   exit 1
 else
   echo "Retrieving subdomain and token from the environment variables"
-  echo -e "SUBDOMAINS=$SUBDOMAINS TOKEN=$TOKEN" > /app/duck.conf
+  echo -e "SUBDOMAINS=\"${SUBDOMAINS}\" TOKEN=\"${TOKEN}\"" > /app/duck.conf
 fi
 
 # modify crontab if logging to file
