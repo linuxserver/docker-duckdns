@@ -1,5 +1,5 @@
 alpine-baselayout-3.2.0-r8
-alpine-keys-2.2-r0
+alpine-keys-2.4-r0
 apk-tools-2.12.7-r0
 bash-5.1.0-r0
 brotli-libs-1.0.9-r3
@@ -30,7 +30,7 @@ scanelf-1.2.8-r0
 shadow-4.8.1-r0
 skalibs-2.10.0.0-r0
 ssl_client-1.32.1-r6
-tzdata-2021c-r0
+tzdata-2021d-r0
 utmps-0.1.0.0-r0
 xz-5.2.5-r0
 xz-libs-5.2.5-r0
