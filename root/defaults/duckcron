@@ -1,1 +1,2 @@
 2,7,12,17,22,27,32,37,42,47,52,57 * * * * /app/duck.sh 2>&1 > /config/duck.log
+0 0 * * * /usr/sbin/logrotate /app/logrotate.conf
