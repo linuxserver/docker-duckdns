@@ -13,7 +13,8 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    curl
+    curl \
+    logrotate
 
 # add local files
 COPY root/ /
