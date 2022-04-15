@@ -60,10 +60,11 @@ app_setup_block_enabled: true
 app_setup_block: |
   - Go to the [duckdns website]({{project_url}}), register your subdomain(s) and retrieve your token
   - Create a container with your subdomain(s) and token
-  - It will update your IP with the DuckDNS service every 5 minutes
+  - It will update your IP with the DuckDNS service every 5 minutes (with a random jitter)
 
 # changelog
 changelogs:
+  - { date: "16.04.22:", desc: "Add random jitter to update time." }
   - { date: "23.02.22:", desc: "Append to log file instead of overwriting every time." }
   - { date: "03.05.21:", desc: "Re-adjust cron timings to prevent peak times, update code formatting." }
   - { date: "23.01.21:", desc: "Rebasing to alpine 3.13." }
