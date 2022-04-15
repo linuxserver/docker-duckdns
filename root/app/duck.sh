@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 
 . /app/duck.conf
-RESPONSE=$(curl -sSk "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
+RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
 if [ "${RESPONSE}" = "OK" ]; then
     echo "Your IP was updated at $(date)"
 else
