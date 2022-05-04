@@ -29,6 +29,9 @@ param_env_vars:
   - { env_var: "SUBDOMAINS", env_value: "subdomain1,subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces"}
   - { env_var: "TOKEN", env_value: "token", desc: "DuckDNS token"}
 param_usage_include_vols: false
+param_usage_include_net: true
+param_net: "host"
+param_net_desc: "Use Host Networking to be able to get the local private IP"
 param_volumes: ""
 param_usage_include_ports: false
 param_ports: ""
@@ -41,6 +44,7 @@ cap_add_param_vars: ""
 opt_param_usage_include_env: true
 opt_param_env_vars:
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config)."}
+  - { env_var: "PRIVATE_SUBDOMAINS", env_value: "private_subdomain1,private_subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces. Needs host networking to be able to resolve the host private IP"}
 opt_param_usage_include_vols: true
 opt_param_volumes:
   - { vol_path: "/config", vol_host_path: "/path/to/appdata/config", desc: "Used in conjunction with logging to file." }
@@ -64,6 +68,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "04.05.22:", desc: "Add option to update domains with private local IP" }
   - { date: "23.02.22:", desc: "Append to log file instead of overwriting every time." }
   - { date: "03.05.21:", desc: "Re-adjust cron timings to prevent peak times, update code formatting." }
   - { date: "23.01.21:", desc: "Rebasing to alpine 3.13." }

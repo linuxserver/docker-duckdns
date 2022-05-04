@@ -77,6 +77,7 @@ services:
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
     container_name: duckdns
+    network_mode: host
     environment:
       - PUID=1000 #optional
       - PGID=1000 #optional
@@ -84,6 +85,7 @@ services:
       - SUBDOMAINS=subdomain1,subdomain2
       - TOKEN=token
       - LOG_FILE=false #optional
+      - PRIVATE_SUBDOMAINS=private_subdomain1,private_subdomain2 #optional
     volumes:
       - /path/to/appdata/config:/config #optional
     restart: unless-stopped
@@ -94,12 +96,14 @@ services:
 ```bash
 docker run -d \
   --name=duckdns \
+  --net=host \
   -e PUID=1000 `#optional` \
   -e PGID=1000 `#optional` \
   -e TZ=Europe/London \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
   -e LOG_FILE=false `#optional` \
+  -e PRIVATE_SUBDOMAINS=private_subdomain1,private_subdomain2 `#optional` \
   -v /path/to/appdata/config:/config `#optional` \
   --restart unless-stopped \
   lscr.io/linuxserver/duckdns:latest
@@ -111,12 +115,14 @@ Container images are configured using parameters passed at runtime (such as thos
 
 | Parameter | Function |
 | :----: | --- |
+| `--net=host` | Use Host Networking to be able to get the local private IP |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
 | `-e SUBDOMAINS=subdomain1,subdomain2` | multiple subdomains allowed, comma separated, no spaces |
 | `-e TOKEN=token` | DuckDNS token |
 | `-e LOG_FILE=false` | Set to `true` to log to file (also need to map /config). |
+| `-e PRIVATE_SUBDOMAINS=private_subdomain1,private_subdomain2` | multiple subdomains allowed, comma separated, no spaces. Needs host networking to be able to resolve the host private IP |
 | `-v /config` | Used in conjunction with logging to file. |
 
 ## Environment variables from files (Docker secrets)
@@ -230,6 +236,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **04.05.22:** - Add option to update domains with private local IP
 * **23.02.22:** - Append to log file instead of overwriting every time.
 * **03.05.21:** - Re-adjust cron timings to prevent peak times, update code formatting.
 * **23.01.21:** - Rebasing to alpine 3.13.
