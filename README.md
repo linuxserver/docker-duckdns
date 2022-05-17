@@ -62,7 +62,7 @@ The architectures supported by this image are:
 
 - Go to the [duckdns website](https://duckdns.org/), register your subdomain(s) and retrieve your token
 - Create a container with your subdomain(s) and token
-- It will update your IP with the DuckDNS service every 5 minutes
+- It will update your IP with the DuckDNS service every 5 minutes (with a random jitter)
 
 ## Usage
 
@@ -230,7 +230,8 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
-* **16.04.22:** - Don't allow insecure connections and add timeout.
+* **17.05.22:** - Don't allow insecure connections and add timeout.
+* **17.05.22:** - Add random jitter to update time.
 * **23.02.22:** - Append to log file instead of overwriting every time.
 * **03.05.21:** - Re-adjust cron timings to prevent peak times, update code formatting.
 * **23.01.21:** - Rebasing to alpine 3.13.
