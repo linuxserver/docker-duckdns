@@ -64,7 +64,8 @@ app_setup_block: |
 
 # changelog
 changelogs:
-  - { date: "16.04.22:", desc: "Add random jitter to update time." }
+  - { date: "17.05.22:", desc: "Don't allow insecure connections and add timeout." }
+  - { date: "17.05.22:", desc: "Add random jitter to update time." }
   - { date: "23.02.22:", desc: "Append to log file instead of overwriting every time." }
   - { date: "03.05.21:", desc: "Re-adjust cron timings to prevent peak times, update code formatting." }
   - { date: "23.01.21:", desc: "Rebasing to alpine 3.13." }
