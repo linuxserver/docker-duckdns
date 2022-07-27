@@ -3,7 +3,7 @@ alpine-keys-2.4-r0
 apk-tools-2.12.7-r0
 bash-5.1.16-r0
 brotli-libs-1.0.9-r3
-busybox-1.32.1-r8
+busybox-1.32.1-r9
 ca-certificates-20211220-r0
 ca-certificates-bundle-20211220-r0
 coreutils-8.32-r2
@@ -31,7 +31,7 @@ s6-ipcserver-2.10.0.0-r0
 scanelf-1.2.8-r0
 shadow-4.8.1-r0
 skalibs-2.10.0.0-r0
-ssl_client-1.32.1-r8
+ssl_client-1.32.1-r9
 tzdata-2022a-r0
 utmps-0.1.0.0-r0
 xz-5.2.5-r1
