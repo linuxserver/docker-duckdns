@@ -32,7 +32,7 @@ scanelf-1.2.8-r0
 shadow-4.8.1-r0
 skalibs-2.10.0.0-r0
 ssl_client-1.32.1-r9
-tzdata-2022a-r0
+tzdata-2022c-r0
 utmps-0.1.0.0-r0
 xz-5.2.5-r1
 xz-libs-5.2.5-r1
