@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.13
+FROM ghcr.io/linuxserver/baseimage-alpine:3.15
 
 # set version label
 ARG BUILD_DATE

@@ -230,6 +230,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **19.09.22:** - Rebase to alpine 3.15.
 * **17.05.22:** - Don't allow insecure connections and add timeout.
 * **17.05.22:** - Add random jitter to update time.
 * **23.02.22:** - Append to log file instead of overwriting every time.
