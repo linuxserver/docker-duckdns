@@ -64,6 +64,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "23.09.22:", desc: "Rebase to alpine 3.16 and s6v3." }
   - { date: "19.09.22:", desc: "Rebase to alpine 3.15." }
   - { date: "17.05.22:", desc: "Don't allow insecure connections and add timeout." }
   - { date: "17.05.22:", desc: "Add random jitter to update time." }
