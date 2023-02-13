@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv bash
 
+# shellcheck source=/dev/null
 . /app/duck.conf
 RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
 if [ "${RESPONSE}" = "OK" ]; then
