@@ -2,11 +2,12 @@
 # shellcheck shell=bash
 
 if [ "${LOG_FILE}" = "true" ]; then
-    LOG_FILE="/config/duck.log"
-    touch "${LOG_FILE}"
-    /usr/sbin/logrotate /app/logrotate.conf
+    DUCK_LOG="/config/duck.log"
+    touch "${DUCK_LOG}"
+    touch /config/logrotate.status
+    /usr/sbin/logrotate -s /config/logrotate.status /app/logrotate.conf
 else
-    LOG_FILE="/dev/null"
+    DUCK_LOG="/dev/null"
 fi
 
 {
@@ -16,4 +17,4 @@ fi
     else
         echo -e "Something went wrong, please check your settings $(date)\nThe response returned was:\n${RESPONSE}"
     fi
-} | tee -a "${LOG_FILE}"
+} | tee -a "${DUCK_LOG}"
