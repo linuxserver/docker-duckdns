@@ -231,6 +231,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **02.03.23:** - Rework shell scripts and cron logic.
 * **13.02.23:** - Rebase to alpine 3.17.
 * **23.09.22:** - Rebase to alpine 3.16 and s6v3.
 * **19.09.22:** - Rebase to alpine 3.15.

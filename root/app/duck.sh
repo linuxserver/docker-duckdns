@@ -1,10 +1,20 @@
 #!/usr/bin/with-contenv bash
+# shellcheck shell=bash
 
-# shellcheck source=/dev/null
-. /app/duck.conf
-RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
-if [ "${RESPONSE}" = "OK" ]; then
-    echo "Your IP was updated at $(date)"
+if [ "${LOG_FILE}" = "true" ]; then
+    DUCK_LOG="/config/duck.log"
+    touch "${DUCK_LOG}"
+    touch /config/logrotate.status
+    /usr/sbin/logrotate -s /config/logrotate.status /app/logrotate.conf
 else
-    echo -e "Something went wrong, please check your settings $(date)\nThe response returned was:\n${RESPONSE}"
+    DUCK_LOG="/dev/null"
 fi
+
+{
+    RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
+    if [ "${RESPONSE}" = "OK" ]; then
+        echo "Your IP was updated at $(date)"
+    else
+        echo -e "Something went wrong, please check your settings $(date)\nThe response returned was:\n${RESPONSE}"
+    fi
+} | tee -a "${DUCK_LOG}"
