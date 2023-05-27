@@ -11,7 +11,6 @@ project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_
 available_architectures:
   - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
   - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
-  - { arch: "{{ arch_armhf }}", tag: "arm32v7-latest"}
 
 # development version
 development_versions: false
@@ -64,6 +63,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
   - { date: "02.03.23:", desc: "Rework shell scripts and cron logic." }
   - { date: "13.02.23:", desc: "Rebase to alpine 3.17." }
   - { date: "23.09.22:", desc: "Rebase to alpine 3.16 and s6v3." }
