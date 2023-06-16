@@ -11,7 +11,17 @@ else
 fi
 
 {
-    RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
+    if [ "${UPDATE_BOTH}" = "true" ]; then
+        IPV4=$(curl -sS4 "https://ipconfig.io")
+        IPV6=$(curl -sS6 "https://ipconfig.io")
+        RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV4}&ipv6=${IPV6}")
+    elif [ "${FORCE_IPV6}" = "true" ]; then
+        IPV6=$(curl -sS6 "https://ipconfig.io")
+        RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV6}")
+    else
+        RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
+    fi
+
     if [ "${RESPONSE}" = "OK" ]; then
         echo "Your IP was updated at $(date)"
     else
