@@ -11,10 +11,14 @@ else
 fi
 
 {
-    if [ "${FORCE_IPV6}" = "true" ]; then
+    if [ "${UPDATE_IP}" = "both" ]; then
+        IPV4=$(curl -sS4 "https://ipconfig.io")
+        IPV6=$(curl -sS6 "https://ipconfig.io")
+        RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV4}&ipv6=${IPV6}")
+    elif [ "${UPDATE_IP}" = "ipv6" ]; then
         IPV6=$(curl -sS6 "https://ipconfig.io")
         RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV6}")
-    else
+    elif [ "${UPDATE_IP}" = "ipv4" ]; then
         RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
     fi
 
