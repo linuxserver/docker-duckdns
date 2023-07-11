@@ -39,7 +39,8 @@ opt_param_env_vars:
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config)."}
 opt_param_usage_include_vols: true
 opt_param_volumes:
-  - { vol_path: "/etc/cron.d", vol_host_path: "/path/to/appdata/cron.d", desc: "Used in conjunction with logging to file." }
+  - { vol_path: "/config", vol_host_path: "/path/to/appdata/config", desc: "Used in conjunction with logging to file." }
+  - { vol_path: "/cron.d", vol_host_path: "/path/to/appdata/cron.d", desc: "Used to set cron job files." }
 opt_param_usage_include_ports: false
 opt_param_ports: ""
 opt_param_device_map: false
@@ -54,7 +55,7 @@ optional_block_1_items: ""
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
-  - Create the desired crontab files (optional [cron help](https://cron.help)) and place in /etc/cron.d
+  - Create the desired crontab files (optional [cron help](https://cron.help)) and place in /cron.d
   - The container will run your cron jobs at the specified duration
 
 # changelog
