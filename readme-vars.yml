@@ -1,11 +1,10 @@
 ---
 
 # project information
-project_name: duckdns
-project_url: "https://duckdns.org/"
-project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png"
-project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence."
-project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
+project_name: cron
+project_url: "https://pkgs.alpinelinux.org/package/edge/main/x86/apk-cron"
+project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is daemon to execute scheduled commands."
+project_lsio_github_repo_url: "https://github.com/trjohnson19/docker-{{ project_name }}"
 
 # supported architectures
 available_architectures:
@@ -25,8 +24,6 @@ param_net_desc: ""
 param_usage_include_env: true
 param_env_vars:
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London"}
-  - { env_var: "SUBDOMAINS", env_value: "subdomain1,subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces"}
-  - { env_var: "TOKEN", env_value: "token", desc: "DuckDNS token"}
 param_usage_include_vols: false
 param_volumes: ""
 param_usage_include_ports: false
@@ -42,7 +39,7 @@ opt_param_env_vars:
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config)."}
 opt_param_usage_include_vols: true
 opt_param_volumes:
-  - { vol_path: "/config", vol_host_path: "/path/to/appdata/config", desc: "Used in conjunction with logging to file." }
+  - { vol_path: "/etc/cron.d", vol_host_path: "/path/to/appdata/cron.d", desc: "Used in conjunction with logging to file." }
 opt_param_usage_include_ports: false
 opt_param_ports: ""
 opt_param_device_map: false
@@ -57,34 +54,9 @@ optional_block_1_items: ""
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
-  - Go to the [duckdns website]({{project_url}}), register your subdomain(s) and retrieve your token
-  - Create a container with your subdomain(s) and token
-  - It will update your IP with the DuckDNS service every 5 minutes (with a random jitter)
+  - Create the desired crontab files (optional [cron help](https://cron.help)) and place in /etc/cron.d
+  - The container will run your cron jobs at the specified duration
 
 # changelog
 changelogs:
-  - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
-  - { date: "02.03.23:", desc: "Rework shell scripts and cron logic." }
-  - { date: "13.02.23:", desc: "Rebase to alpine 3.17." }
-  - { date: "23.09.22:", desc: "Rebase to alpine 3.16 and s6v3." }
-  - { date: "19.09.22:", desc: "Rebase to alpine 3.15." }
-  - { date: "17.05.22:", desc: "Don't allow insecure connections and add timeout." }
-  - { date: "17.05.22:", desc: "Add random jitter to update time." }
-  - { date: "23.02.22:", desc: "Append to log file instead of overwriting every time." }
-  - { date: "03.05.21:", desc: "Re-adjust cron timings to prevent peak times, update code formatting." }
-  - { date: "23.01.21:", desc: "Rebasing to alpine 3.13." }
-  - { date: "01.06.20:", desc: "Rebasing to alpine 3.12." }
-  - { date: "13.04.20:", desc: "Add donation links for DuckDNS." }
-  - { date: "19.12.19:", desc: "Rebasing to alpine 3.11." }
-  - { date: "24.09.19:", desc: "Fix perms on github and remove chmod that can stall the container." }
-  - { date: "28.06.19:", desc: "Rebasing to alpine 3.10." }
-  - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
-  - { date: "22.02.19:", desc: "Rebasing to alpine 3.9." }
-  - { date: "08.02.19:", desc: "Update readme with optional parameters." }
-  - { date: "10.12.18:", desc: "Fix docker compose example." }
-  - { date: "15.10.18:", desc: "Multi-arch image." }
-  - { date: "22.08.18:", desc: "Rebase to alpine 3.8." }
-  - { date: "08.12.17:", desc: "Rebase to alpine 3.7." }
-  - { date: "28.05.17:", desc: "Rebase to alpine 3.6." }
-  - { date: "09.02.17:", desc: "Rebase to alpine 3.5." }
-  - { date: "17.11.16:", desc: "Initial release." }
+  - { date: "11.07.23:", desc: "Initial release." }
