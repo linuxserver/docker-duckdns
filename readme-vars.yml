@@ -41,6 +41,7 @@ opt_param_usage_include_vols: true
 opt_param_volumes:
   - { vol_path: "/config", vol_host_path: "/path/to/appdata/config", desc: "Used in conjunction with logging to file." }
   - { vol_path: "/cron.d", vol_host_path: "/path/to/appdata/cron.d", desc: "Used to set cron job files." }
+  - { vol_path: "/scripts", vol_host_path: "/path/to/appdata/scripts", desc: "Used for any scripts required for cron jobs." }
 opt_param_usage_include_ports: false
 opt_param_ports: ""
 opt_param_device_map: false
