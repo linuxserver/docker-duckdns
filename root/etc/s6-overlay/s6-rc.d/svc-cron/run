@@ -1,4 +1,23 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-exec /usr/sbin/crond -f -S -l 5
+# permissions
+lsiown -R abc:abc \
+    /app \
+    /config \
+    /crontabs \
+    /etc/periodic \
+    /scripts
+
+# create log file
+if [ "${LOG_FILE}" = "true" ]; then
+    CRON_LOG="/config/cron.log"
+    touch "${CRON_LOG}"
+    touch /config/logrotate.status
+    /usr/sbin/logrotate -s /config/logrotate.status /app/logrotate.conf
+else
+    CRON_LOG="/dev/null"
+fi
+
+# log to the file or /dev/null
+/usr/sbin/crond -f -S -l 5 | /usr/bin/tee "${LOG_FILE}"
