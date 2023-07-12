@@ -40,7 +40,12 @@ opt_param_env_vars:
 opt_param_usage_include_vols: true
 opt_param_volumes:
   - { vol_path: "/config", vol_host_path: "/path/to/appdata/config", desc: "Used in conjunction with logging to file." }
-  - { vol_path: "/cron.d", vol_host_path: "/path/to/appdata/cron.d", desc: "Used to set cron job files." }
+  - { vol_path: "/crontabs/abc", vol_host_path: "/path/to/appdata/crontabs/abc", desc: "The crontab file to be used for the container's user." }
+  - { vol_path: "/etc/periodic/15min", vol_host_path: "/path/to/appdata/periodic/15min", desc: "Directory of executable files to be run every 15 minutes." }
+  - { vol_path: "/etc/periodic/hourly", vol_host_path: "/path/to/appdata/periodic/hourly", desc: "Directory of executable files to be run every hour." }
+  - { vol_path: "/etc/periodic/daily", vol_host_path: "/path/to/appdata/periodic/daily", desc: "Directory of executable files to be run every day at 2 AM." }
+  - { vol_path: "/etc/periodic/weekly", vol_host_path: "/path/to/appdata/periodic/weekly", desc: "Directory of executable files to be run every Saturday at 3 AM." }
+  - { vol_path: "/etc/periodic/monthly", vol_host_path: "/path/to/appdata/periodic/monthly", desc: "Directory of executable files to be run on the 1st of every month at 5 AM." }
   - { vol_path: "/scripts", vol_host_path: "/path/to/appdata/scripts", desc: "Used for any scripts required for cron jobs." }
 opt_param_usage_include_ports: false
 opt_param_ports: ""
@@ -56,7 +61,7 @@ optional_block_1_items: ""
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
-  - Create the desired crontab files (optional [cron help](https://cron.help)) and place in /cron.d
+  - Create the desired crontab file (optional [cron help](https://cron.help)) and make available at /crontabs/abc
   - The container will run your cron jobs at the specified duration
 
 # changelog
