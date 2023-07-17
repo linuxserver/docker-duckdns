@@ -18,7 +18,7 @@ fi
     elif [ "${UPDATE_IP}" = "ipv6" ]; then
         IPV6=$(curl -sS6 "https://ipconfig.io")
         RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV6}")
-    elif [ "${UPDATE_IP}" = "ipv4" ]; then
+    else
         RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
     fi
 

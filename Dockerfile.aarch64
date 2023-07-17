@@ -9,8 +9,6 @@ ARG DUCKDNS_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="aptalca"
 
-ENV UPDATE_IP=ipv4
-
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
