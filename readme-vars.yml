@@ -64,6 +64,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "17.07.23:", desc: "Add support for public IPv6 address update." }
   - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
   - { date: "02.03.23:", desc: "Rework shell scripts and cron logic." }
   - { date: "13.02.23:", desc: "Rebase to alpine 3.17." }
