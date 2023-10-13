@@ -11,14 +11,19 @@ else
 fi
 
 {
-    if [ "${UPDATE_IP}" = "both" ]; then
-        IPV4=$(curl -sS4 "https://ipconfig.io")
-        IPV6=$(curl -sS6 "https://ipconfig.io")
-        RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV4}&ipv6=${IPV6}")
+    # Use cloudflare to autodetect IP if UPDATE_IP is set
+    if [ "${UPDATE_IP}" = "ipv4" ]; then
+        IPV4=$(dig +short ch txt whoami.cloudflare -4 @1.1.1.1 | sed 's/"//g')
+        RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV4}")
     elif [ "${UPDATE_IP}" = "ipv6" ]; then
-        IPV6=$(curl -sS6 "https://ipconfig.io")
+        IPV6=$(dig +short ch txt whoami.cloudflare -6 @2606:4700:4700::1111 | sed 's/"//g')
         RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV6}")
+    elif [ "${UPDATE_IP}" = "both" ]; then
+        IPV4=$(dig +short ch txt whoami.cloudflare -4 @1.1.1.1 | sed 's/"//g')
+        IPV6=$(dig +short ch txt whoami.cloudflare -6 @2606:4700:4700::1111 | sed 's/"//g')
+        RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=${IPV4}&ipv6=${IPV6}")
     else
+    # Use DuckDns to autodetect IPv4 (default behaviour)
         RESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=")
     fi
 
