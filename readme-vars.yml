@@ -62,10 +62,12 @@ app_setup_block: |
   - Create a container with your subdomain(s) and token
   - It will update your IP with the DuckDNS service every 5 minutes (with a random jitter)
 
-  ## Notice regarding automatic detection of public IPv6 address
+  ## Notice regarding automatic detection
 
   Using the `UPDATE_IP` variable whatever its value (`ipv4`, `ipv6` or `both`) uses external *Cloudflare whoami* service to detect public IP addresses.
   **Be aware that using this variable will query a third-party service other than DuckDNS.**
+
+  Omitting the `UPDATE_IP` variable uses DuckDNS for detection and only supports IPv4.
 
 # changelog
 changelogs:
