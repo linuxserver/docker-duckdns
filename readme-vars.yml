@@ -39,7 +39,7 @@ cap_add_param_vars: ""
 # optional container parameters
 opt_param_usage_include_env: true
 opt_param_env_vars:
-  - { env_var: "UPDATE_IP", env_value: "ipv4", desc: "Set to `ipv6` or `ipv4` to update  **only** with your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable implies the [use of a third-party service](#notice-regarding-automatic-detection-of-public-ipv6-address)."}
+  - { env_var: "UPDATE_IP", env_value: "ipv4", desc: "Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection). Omitting this variable uses DuckDNS for detection and only supports IPv4."}
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config)."}
 opt_param_usage_include_vols: true
 opt_param_volumes:
