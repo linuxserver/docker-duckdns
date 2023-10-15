@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-if [ "${LOG_FILE}" = "true" ]; then
+if [ "${LOG_FILE,,}" = "true" ]; then
     DUCK_LOG="/config/duck.log"
     touch "${DUCK_LOG}"
     touch /config/logrotate.status

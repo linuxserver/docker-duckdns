@@ -25,7 +25,7 @@ param_net_desc: ""
 param_usage_include_env: true
 param_env_vars:
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London"}
-  - { env_var: "SUBDOMAINS", env_value: "subdomain1,subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces"}
+  - { env_var: "SUBDOMAINS", env_value: "subdomain1,subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces, if your domain is user.duckdns.org you put user, not a sub-subdomain"}
   - { env_var: "TOKEN", env_value: "token", desc: "DuckDNS token"}
 param_usage_include_vols: false
 param_volumes: ""
@@ -59,7 +59,7 @@ optional_block_1_items: ""
 app_setup_block_enabled: true
 app_setup_block: |
   - Go to the [duckdns website]({{project_url}}), register your subdomain(s) and retrieve your token
-  - Create a container with your subdomain(s) and token
+  - Create a container with your subdomain(s) and token. If you own user.duckdns.org, you put `SUBDOMAINS=user` you would NOT put a sub subdomain like overseerr from overseerr.user.ducksdns.org
   - It will update your IP with the DuckDNS service every 5 minutes (with a random jitter)
 
   ## Notice regarding automatic detection
@@ -71,6 +71,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "14.10.23:", desc: "Rework shell script for case insensitivity and update readme to be more clear." }
   - { date: "13.10.23:", desc: "Add support for public IPv6 address update using Cloudflare." }
   - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
   - { date: "02.03.23:", desc: "Rework shell scripts and cron logic." }
