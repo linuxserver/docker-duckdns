@@ -19,9 +19,9 @@ development_versions_items: ""
 # container parameters
 common_param_env_vars_enabled: 'optional' #PGID, PUID, etc, you can set it to 'optional'
 param_container_name: "{{ project_name }}"
-param_usage_include_net: false #you can set it to 'optional'
-param_net: ""
-param_net_desc: ""
+param_usage_include_net: 'optional' #you can set it to 'optional'
+param_net: "host"
+param_net_desc: "Use host networking for IPv6 detection"
 param_usage_include_env: true
 param_env_vars:
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London"}
@@ -39,7 +39,7 @@ cap_add_param_vars: ""
 # optional container parameters
 opt_param_usage_include_env: true
 opt_param_env_vars:
-  - { env_var: "UPDATE_IP", env_value: "ipv4", desc: "Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection). Omitting this variable uses DuckDNS for detection and only supports IPv4."}
+  - { env_var: "UPDATE_IP", env_value: "ipv4", desc: "Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection). Omitting this variable uses DuckDNS for detection and only supports IPv4. `both` and `ipv6` modes needs [host networking](#networking-net)."}
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config)."}
 opt_param_usage_include_vols: true
 opt_param_volumes:
