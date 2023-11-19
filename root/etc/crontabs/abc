@@ -1,1 +1,2 @@
-*/5 * * * * sleep $((60 + $RANDOM % 230)); /app/duck.sh 2>&1
+# min   hour    day     month   weekday command
+*/5     *       *       *       *       sleep $((60 + $RANDOM % 230)); /app/duck.sh 2>&1
