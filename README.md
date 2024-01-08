@@ -93,7 +93,7 @@ services:
       - UPDATE_IP=ipv4 #optional
       - LOG_FILE=false #optional
     volumes:
-      - /path/to/appdata/config:/config #optional
+      - /path/to/duckdns/config:/config #optional
     restart: unless-stopped
 ```
 
@@ -110,7 +110,7 @@ docker run -d \
   -e TOKEN=token \
   -e UPDATE_IP=ipv4 `#optional` \
   -e LOG_FILE=false `#optional` \
-  -v /path/to/appdata/config:/config `#optional` \
+  -v /path/to/duckdns/config:/config `#optional` \
   --restart unless-stopped \
   lscr.io/linuxserver/duckdns:latest
 ```
@@ -129,7 +129,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 | `-e TOKEN=token` | DuckDNS token |
 | `-e UPDATE_IP=ipv4` | Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection). Omitting this variable uses DuckDNS for detection and only supports IPv4. `both` and `ipv6` modes needs [host networking](#networking-net). |
 | `-e LOG_FILE=false` | Set to `true` to log to file (also need to map /config). |
-| `-v /config` | Used in conjunction with logging to file. |
+| `-v /config` | Persistent config files |
 
 ## Environment variables from files (Docker secrets)
 
@@ -309,6 +309,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **23.12.23:** - Rebase to Alpine 3.19.
 * **14.10.23:** - Rework shell script for case insensitivity and update readme to be more clear.
 * **13.10.23:** - Add support for public IPv6 address update using Cloudflare.
 * **25.05.23:** - Rebase to Alpine 3.18, deprecate armhf.
