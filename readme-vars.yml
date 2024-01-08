@@ -43,7 +43,7 @@ opt_param_env_vars:
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config).", env_options: ["false", "true"] }
 opt_param_usage_include_vols: true
 opt_param_volumes:
-  - { vol_path: "/config", vol_host_path: "/path/to/appdata/config", desc: "Used in conjunction with logging to file." }
+  - { vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files" }
 opt_param_usage_include_ports: false
 opt_param_ports: ""
 opt_param_device_map: false
@@ -71,6 +71,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
   - { date: "14.10.23:", desc: "Rework shell script for case insensitivity and update readme to be more clear." }
   - { date: "13.10.23:", desc: "Add support for public IPv6 address update using Cloudflare." }
   - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
