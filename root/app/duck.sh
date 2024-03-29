@@ -32,7 +32,13 @@ fi
     fi
 
     if [ "${RESPONSE}" = "OK" ]; then
-        echo "Your IP was updated at $(date)"
+        if [ "${UPDATE_IP}" = "ipv4" ]; then
+            echo "Your IP was updated at $(date) to IPv4: ${IPV4}"
+        elif [ "${UPDATE_IP}" = "ipv6" ]; then
+            echo "Your IP was updated at $(date) to IPv6: ${IPV6}"
+        else
+            echo "Your IP was updated at $(date) to IPv4: ${IPV4} & IPv6: {$IPV6}" 
+        fi
     else
         echo -e "Something went wrong, please check your settings $(date)\nThe response returned was:\n${RESPONSE}"
     fi
