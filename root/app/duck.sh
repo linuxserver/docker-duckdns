@@ -29,23 +29,18 @@ fi
     # Use DuckDns to autodetect IPv4 (default behaviour)
         echo "Detecting IPv4 via DuckDNS"
         DRESPONSE=$(curl -sS --max-time 60 "https://www.duckdns.org/update?domains=${SUBDOMAINS}&token=${TOKEN}&ip=&verbose")
-        STATE=$(${DRESPONSE} | awk 'NR==4')
-        IPV4=$(${DRESPONSE} | awk 'NR==2')
-        IPV6=$(${DRESPONSE} | awk 'NR==3')
-        if [ "${STATE}" = "UPDATED" ] || [ "${STATE}" = "NOCHANGE" ]; then
-            RESPONSE="OK"
-            else
-            RESPONSE="KO"
-        fi
+        IPV4=$(echo "${DRESPONSE}" | awk 'NR==2')
+        IPV6=$(echo "${DRESPONSE}" | awk 'NR==3')
+        RESPONSE=$(echo "${DRESPONSE}" | awk 'NR==1')
     fi
 
     if [ "${RESPONSE}" = "OK" ]; then
-        if [ "${UPDATE_IP}" = "ipv4" ]; then
+        if [ "${IPV4}" != "" ] && [ "${IPV6}" == "" ]; then
             echo "Your IP was updated at $(date) to IPv4: ${IPV4}"
-        elif [ "${UPDATE_IP}" = "ipv6" ]; then
+        elif [ "${IPV4}" == "" ] && [ "${IPV6}" != "" ]; then
             echo "Your IP was updated at $(date) to IPv6: ${IPV6}"
         else
-            echo "Your IP was updated at $(date) to IPv4: ${IPV4} & IPv6 (if available): {$IPV6}" 
+            echo "Your IP was updated at $(date) to IPv4: ${IPV4} & IPv6 to: {$IPV6}" 
         fi
     else
         echo -e "Something went wrong, please check your settings $(date)\nThe response returned was:\n${RESPONSE}"
