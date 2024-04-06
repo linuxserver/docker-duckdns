@@ -42,7 +42,7 @@ opt_param_env_vars:
   - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config).", env_options: ["false", "true"] }
 opt_param_usage_include_vols: true
 opt_param_volumes:
-  - { vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files. Also et `LOG_FILE=true` to keep address history." }
+  - { vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files. Also set `LOG_FILE=true` to keep address history." }
 opt_param_usage_include_ports: false
 opt_param_ports: ""
 opt_param_device_map: false
