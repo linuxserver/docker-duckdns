@@ -42,7 +42,7 @@ libssl3                 3.1.4-r6              apk
 libunistring            1.1-r2                apk     
 libuv                   1.47.0-r0             apk     
 libverto                0.3.2-r2              apk     
-libxml2                 2.11.7-r0             apk     
+libxml2                 2.11.8-r0             apk     
 linux-pam               1.5.3-r7              apk     
 logrotate               3.21.0-r1             apk     
 musl                    1.2.4_git20230717-r4  apk     
