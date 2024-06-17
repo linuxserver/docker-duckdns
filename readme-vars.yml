@@ -70,6 +70,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "17.06.24:", desc: "Bump CI_DELAY to 120 seconds as ARM builds were failing." }
   - { date: "30.03.24:", desc: "Added IP address to logging output when IP changes." }
   - { date: "23.12.23:", desc: "Rebase to Alpine 3.19." }
   - { date: "14.10.23:", desc: "Rework shell script for case insensitivity and update readme to be more clear." }

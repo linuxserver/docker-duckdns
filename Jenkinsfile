@@ -30,7 +30,7 @@ pipeline {
     CI_WEB='false'
     CI_PORT=''
     CI_SSL=''
-    CI_DELAY='5'
+    CI_DELAY='120'
     CI_DOCKERENV='SUBDOMAINS=testing|TOKEN=testing'
     CI_AUTH=''
     CI_WEBPATH=''
