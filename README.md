@@ -293,6 +293,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **17.06.24:** - Bump CI_DELAY to 120 seconds as ARM builds were failing.
 * **30.03.24:** - Added IP address to logging output when IP changes.
 * **23.12.23:** - Rebase to Alpine 3.19.
 * **14.10.23:** - Rework shell script for case insensitivity and update readme to be more clear.
