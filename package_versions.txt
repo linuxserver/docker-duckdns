@@ -2,7 +2,7 @@ NAME                    VERSION               TYPE
 alpine-baselayout       3.4.3-r2              apk     
 alpine-baselayout-data  3.4.3-r2              apk     
 alpine-keys             2.4-r1                apk     
-alpine-release          3.19.1-r0             apk     
+alpine-release          3.19.2-r0             apk     
 apk-tools               2.14.4-r0             apk     
 bash                    5.2.21-r0             apk     
 bind-libs               9.18.24-r1            apk     
