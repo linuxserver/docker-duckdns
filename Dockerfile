@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19
+FROM ghcr.io/linuxserver/baseimage-alpine:3.20
 
 # set version label
 ARG BUILD_DATE
@@ -13,7 +13,8 @@ RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
     bind-tools \
-    logrotate
+    logrotate && \
+  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 # add local files
 COPY root/ /
