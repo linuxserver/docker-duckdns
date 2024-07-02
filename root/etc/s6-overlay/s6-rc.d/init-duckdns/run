@@ -9,7 +9,6 @@ fi
 
 # permissions
 lsiown -R abc:abc \
-    /app \
     /config
 
 # run initial IP update
