@@ -6,12 +6,10 @@ project_url: "https://duckdns.org/"
 project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png"
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
-
 # supported architectures
 available_architectures:
-  - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
-  - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
-
+  - {arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
+  - {arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
 # container parameters
 common_param_env_vars_enabled: 'optional' #PGID, PUID, etc, you can set it to 'optional'
 param_container_name: "{{ project_name }}"
@@ -20,20 +18,17 @@ param_net: "host"
 param_net_desc: "Use host networking for IPv6 detection"
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "SUBDOMAINS", env_value: "subdomain1,subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces, if your domain is user.duckdns.org you put user, not a sub-subdomain"}
-  - { env_var: "TOKEN", env_value: "token", desc: "DuckDNS token"}
-
+  - {env_var: "SUBDOMAINS", env_value: "subdomain1,subdomain2", desc: "multiple subdomains allowed, comma separated, no spaces, if your domain is user.duckdns.org you put user, not a sub-subdomain"}
+  - {env_var: "TOKEN", env_value: "token", desc: "DuckDNS token"}
 # optional container parameters
 opt_param_usage_include_env: true
 opt_param_env_vars:
-  - { env_var: "UPDATE_IP", env_value: "ipv4", desc: "Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection). Omitting this variable uses DuckDNS for detection and only supports IPv4. `both` and `ipv6` modes needs [host networking](#networking-net).", env_options: ["", "ipv4", "ipv6", "both"] }
-  - { env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config).", env_options: ["false", "true"] }
+  - {env_var: "UPDATE_IP", env_value: "ipv4", desc: "Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection). Omitting this variable uses DuckDNS for detection and only supports IPv4. `both` and `ipv6` modes needs [host networking](#networking-net).", env_options: ["", "ipv4", "ipv6", "both"]}
+  - {env_var: "LOG_FILE", env_value: "false", desc: "Set to `true` to log to file (also need to map /config).", env_options: ["false", "true"]}
 opt_param_usage_include_vols: true
 opt_param_volumes:
-  - { vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files. Also set `LOG_FILE=true` to keep address history." }
-
+  - {vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files. Also set `LOG_FILE=true` to keep address history."}
 readonly_supported: true
-
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
@@ -47,37 +42,77 @@ app_setup_block: |
   **Be aware that using this variable will query a third-party service other than DuckDNS.**
 
   Omitting the `UPDATE_IP` variable uses DuckDNS for detection and only supports IPv4.
-
+# init diagram
+init_diagram: |
+  "duckdns:latest": {
+    docker-mods
+    base {
+      fix-attr +\nlegacy cont-init
+    }
+    docker-mods -> base
+    legacy-services
+    custom services
+    init-services -> legacy-services
+    init-services -> custom services
+    custom services -> legacy-services
+    legacy-services -> ci-service-check
+    init-migrations -> init-adduser
+    init-os-end -> init-config
+    init-config -> init-config-end
+    init-duckdns -> init-config-end
+    init-os-end -> init-crontab-config
+    init-mods-end -> init-custom-files
+    init-config -> init-duckdns
+    base -> init-envfile
+    base -> init-migrations
+    base -> init-mods
+    init-config-end -> init-mods
+    init-mods -> init-mods-end
+    init-mods-package-install -> init-mods-end
+    init-mods -> init-mods-package-install
+    base -> init-os-end
+    init-adduser -> init-os-end
+    init-envfile -> init-os-end
+    init-migrations -> init-os-end
+    init-custom-files -> init-services
+    init-mods-end -> init-services
+    init-services -> svc-cron
+    svc-cron -> legacy-services
+  }
+  Base Images: {
+    "baseimage-alpine:3.20"
+  }
+  "duckdns:latest" <- Base Images
 # changelog
 changelogs:
-  - { date: "24.06.24:", desc: "Rebase to Alpine 3.20." }
-  - { date: "17.06.24:", desc: "Bump CI_DELAY to 120 seconds as ARM builds were failing." }
-  - { date: "30.03.24:", desc: "Added IP address to logging output when IP changes." }
-  - { date: "23.12.23:", desc: "Rebase to Alpine 3.19." }
-  - { date: "14.10.23:", desc: "Rework shell script for case insensitivity and update readme to be more clear." }
-  - { date: "13.10.23:", desc: "Add support for public IPv6 address update using Cloudflare." }
-  - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
-  - { date: "02.03.23:", desc: "Rework shell scripts and cron logic." }
-  - { date: "13.02.23:", desc: "Rebase to alpine 3.17." }
-  - { date: "23.09.22:", desc: "Rebase to alpine 3.16 and s6v3." }
-  - { date: "19.09.22:", desc: "Rebase to alpine 3.15." }
-  - { date: "17.05.22:", desc: "Don't allow insecure connections and add timeout." }
-  - { date: "17.05.22:", desc: "Add random jitter to update time." }
-  - { date: "23.02.22:", desc: "Append to log file instead of overwriting every time." }
-  - { date: "03.05.21:", desc: "Re-adjust cron timings to prevent peak times, update code formatting." }
-  - { date: "23.01.21:", desc: "Rebasing to alpine 3.13." }
-  - { date: "01.06.20:", desc: "Rebasing to alpine 3.12." }
-  - { date: "13.04.20:", desc: "Add donation links for DuckDNS." }
-  - { date: "19.12.19:", desc: "Rebasing to alpine 3.11." }
-  - { date: "24.09.19:", desc: "Fix perms on github and remove chmod that can stall the container." }
-  - { date: "28.06.19:", desc: "Rebasing to alpine 3.10." }
-  - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
-  - { date: "22.02.19:", desc: "Rebasing to alpine 3.9." }
-  - { date: "08.02.19:", desc: "Update readme with optional parameters." }
-  - { date: "10.12.18:", desc: "Fix docker compose example." }
-  - { date: "15.10.18:", desc: "Multi-arch image." }
-  - { date: "22.08.18:", desc: "Rebase to alpine 3.8." }
-  - { date: "08.12.17:", desc: "Rebase to alpine 3.7." }
-  - { date: "28.05.17:", desc: "Rebase to alpine 3.6." }
-  - { date: "09.02.17:", desc: "Rebase to alpine 3.5." }
-  - { date: "17.11.16:", desc: "Initial release." }
+  - {date: "24.06.24:", desc: "Rebase to Alpine 3.20."}
+  - {date: "17.06.24:", desc: "Bump CI_DELAY to 120 seconds as ARM builds were failing."}
+  - {date: "30.03.24:", desc: "Added IP address to logging output when IP changes."}
+  - {date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
+  - {date: "14.10.23:", desc: "Rework shell script for case insensitivity and update readme to be more clear."}
+  - {date: "13.10.23:", desc: "Add support for public IPv6 address update using Cloudflare."}
+  - {date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf."}
+  - {date: "02.03.23:", desc: "Rework shell scripts and cron logic."}
+  - {date: "13.02.23:", desc: "Rebase to alpine 3.17."}
+  - {date: "23.09.22:", desc: "Rebase to alpine 3.16 and s6v3."}
+  - {date: "19.09.22:", desc: "Rebase to alpine 3.15."}
+  - {date: "17.05.22:", desc: "Don't allow insecure connections and add timeout."}
+  - {date: "17.05.22:", desc: "Add random jitter to update time."}
+  - {date: "23.02.22:", desc: "Append to log file instead of overwriting every time."}
+  - {date: "03.05.21:", desc: "Re-adjust cron timings to prevent peak times, update code formatting."}
+  - {date: "23.01.21:", desc: "Rebasing to alpine 3.13."}
+  - {date: "01.06.20:", desc: "Rebasing to alpine 3.12."}
+  - {date: "13.04.20:", desc: "Add donation links for DuckDNS."}
+  - {date: "19.12.19:", desc: "Rebasing to alpine 3.11."}
+  - {date: "24.09.19:", desc: "Fix perms on github and remove chmod that can stall the container."}
+  - {date: "28.06.19:", desc: "Rebasing to alpine 3.10."}
+  - {date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag."}
+  - {date: "22.02.19:", desc: "Rebasing to alpine 3.9."}
+  - {date: "08.02.19:", desc: "Update readme with optional parameters."}
+  - {date: "10.12.18:", desc: "Fix docker compose example."}
+  - {date: "15.10.18:", desc: "Multi-arch image."}
+  - {date: "22.08.18:", desc: "Rebase to alpine 3.8."}
+  - {date: "08.12.17:", desc: "Rebase to alpine 3.7."}
+  - {date: "28.05.17:", desc: "Rebase to alpine 3.6."}
+  - {date: "09.02.17:", desc: "Rebase to alpine 3.5."}
+  - {date: "17.11.16:", desc: "Initial release."}
