@@ -30,6 +30,7 @@ opt_param_usage_include_vols: true
 opt_param_volumes:
   - {vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files. Also set `LOG_FILE=true` to keep address history."}
 readonly_supported: true
+nonroot_supported: false
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
@@ -86,6 +87,7 @@ init_diagram: |
   "duckdns:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "27.01.25:", desc: "Rebase to Alpine 3.21."}
   - {date: "24.06.24:", desc: "Rebase to Alpine 3.20."}
   - {date: "17.06.24:", desc: "Bump CI_DELAY to 120 seconds as ARM builds were failing."}
   - {date: "30.03.24:", desc: "Added IP address to logging output when IP changes."}

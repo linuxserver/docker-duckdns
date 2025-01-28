@@ -5,7 +5,8 @@ if [[ "${LOG_FILE,,}" = "true" ]]; then
     DUCK_LOG="/config/duck.log"
     touch "${DUCK_LOG}"
     touch /config/logrotate.status
-    /usr/sbin/logrotate -s /config/logrotate.status /app/logrotate.conf
+    chmod 640 /config/logrotate.status
+    /usr/sbin/logrotate -s /config/logrotate.status /config/logrotate.conf
 else
     DUCK_LOG="/dev/null"
 fi
@@ -47,7 +48,7 @@ fi
         elif [[ "${IPV4}" == "" ]] && [[ "${IPV6}" != "" ]]; then
             echo "Your IP was updated at $(date) to IPv6: ${IPV6}"
         else
-            echo "Your IP was updated at $(date) to IPv4: ${IPV4} & IPv6 to: {$IPV6}" 
+            echo "Your IP was updated at $(date) to IPv4: ${IPV4} & IPv6 to: {$IPV6}"
         fi
     elif [[ "${RESPONSE}" = "OK" ]] && [[ "${IPCHANGE}" = "NOCHANGE" ]]; then
         echo "DuckDNS request at $(date) successful. IP(s) unchanged."

@@ -7,6 +7,11 @@ if [ -z "${SUBDOMAINS}" ] || [ -z "${TOKEN}" ]; then
     sleep infinity
 fi
 
+if [[ ! -f /config/logrotate.conf ]]; then
+    cp /defaults/logrotate.conf /config/logrotate.conf
+    chmod 640 /config/logrotate.conf
+fi
+
 # permissions
 lsiown -R abc:abc \
     /config
