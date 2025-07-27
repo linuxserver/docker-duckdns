@@ -85,6 +85,7 @@ init_diagram: |
   "duckdns:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "27.07.25:", desc: "Rebase to Alpine 3.22."}
   - {date: "27.01.25:", desc: "Rebase to Alpine 3.21."}
   - {date: "24.06.24:", desc: "Rebase to Alpine 3.20."}
   - {date: "17.06.24:", desc: "Bump CI_DELAY to 120 seconds as ARM builds were failing."}
