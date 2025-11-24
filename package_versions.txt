@@ -6,11 +6,11 @@ alpine-keys             2.5-r0            apk
 alpine-release          3.22.2-r0         apk     
 apk-tools               2.14.9-r3         apk     
 bash                    5.2.37-r0         apk     
-bind-libs               9.20.15-r0        apk     
-bind-tools              9.20.15-r0        apk     
+bind-libs               9.20.16-r0        apk     
+bind-tools              9.20.16-r0        apk     
 brotli-libs             1.1.0-r2          apk     
-busybox                 1.37.0-r19        apk     
-busybox-binsh           1.37.0-r19        apk     
+busybox                 1.37.0-r20        apk     
+busybox-binsh           1.37.0-r20        apk     
 c-ares                  1.34.5-r0         apk     
 ca-certificates         20250911-r0       apk     
 ca-certificates-bundle  20250911-r0       apk     
@@ -22,7 +22,7 @@ coreutils-sha512sum     9.7-r1            apk
 curl                    8.14.1-r2         apk     
 findutils               4.10.0-r0         apk     
 fstrm                   0.6.1-r4          apk     
-jq                      1.8.0-r0          apk     
+jq                      1.8.1-r0          apk     
 json-c                  0.18-r1           apk     
 keyutils-libs           1.6.3-r4          apk     
 krb5-conf               1.0-r2            apk     
@@ -59,7 +59,7 @@ readline                8.2.13-r1         apk
 scanelf                 1.3.8-r1          apk     
 shadow                  4.17.3-r0         apk     
 skalibs-libs            2.14.4.0-r0       apk     
-ssl_client              1.37.0-r19        apk     
+ssl_client              1.37.0-r20        apk     
 tzdata                  2025b-r0          apk     
 userspace-rcu           0.15.2-r0         apk     
 utmps-libs              0.1.3.1-r0        apk     
