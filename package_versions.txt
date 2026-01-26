@@ -6,8 +6,8 @@ alpine-keys             2.5-r0            apk
 alpine-release          3.22.2-r0         apk     
 apk-tools               2.14.9-r3         apk     
 bash                    5.2.37-r0         apk     
-bind-libs               9.20.17-r0        apk     
-bind-tools              9.20.17-r0        apk     
+bind-libs               9.20.18-r0        apk     
+bind-tools              9.20.18-r0        apk     
 brotli-libs             1.1.0-r2          apk     
 busybox                 1.37.0-r20        apk     
 busybox-binsh           1.37.0-r20        apk     
