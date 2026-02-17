@@ -1,11 +1,46 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-#Check to make sure the subdomain and token are set
+# Check to make sure the subdomain and token are set
 if [ -z "${SUBDOMAINS}" ] || [ -z "${TOKEN}" ]; then
     echo "Please pass both your subdomain(s) and token as environment variables in your docker run command. See the readme for more details."
     sleep infinity
 fi
+
+# Render template into real crontab with default interval if not provided
+UPDATE_INTERVAL=${UPDATE_INTERVAL:-5m}
+if [[ ! "$UPDATE_INTERVAL" =~ ^[0-9]+[mh]?$ ]]; then
+    echo "Invalid interval format: \"$UPDATE_INTERVAL\", expected format \"[0-9]+[mh]?\""
+    exit 1
+fi
+
+case "$UPDATE_INTERVAL" in
+  *h)
+    HOURS=${UPDATE_INTERVAL%h}
+    if (( HOURS < 1 || HOURS > 24 )); then
+        echo "Update interval must be between 1-24 hours"
+        exit 1
+    fi
+    HOURS="*/$HOURS"
+
+    # We want a single run per selected hour, with the template's jitter handling
+    # the exact seconds.
+    MINUTES="0"
+    ;;
+  *)
+    MINUTES=${UPDATE_INTERVAL%m}
+    if (( MINUTES < 5 || MINUTES > 60 )); then
+        echo "Update interval must be between 5-60 minutes"
+        exit 1
+    fi
+    MINUTES="*/$MINUTES"
+
+    HOURS="*"
+    ;;
+esac
+
+sed "s|\${MINUTES} \${HOURS}|$MINUTES $HOURS|g" < /defaults/abc.tmpl > /etc/crontabs/abc
+chmod 644 /etc/crontabs/abc
 
 if [[ ! -f /config/logrotate.conf ]]; then
     cp /defaults/logrotate.conf /config/logrotate.conf
