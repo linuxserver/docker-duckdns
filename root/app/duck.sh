@@ -7,6 +7,7 @@ if [[ "${LOG_FILE,,}" = "true" ]]; then
     touch /config/logrotate.status
     chmod 640 /config/logrotate.status
     /usr/sbin/logrotate -s /config/logrotate.status /config/logrotate.conf
+    echo "duck.sh invoked at $(date)" >> "${DUCK_LOG}"
 else
     DUCK_LOG="/dev/null"
 fi

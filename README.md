@@ -58,7 +58,7 @@ The architectures supported by this image are:
 
 - Go to the [duckdns website](https://duckdns.org/), register your subdomain(s) and retrieve your token.
 - Create a container with your subdomain(s) and token. If you own `user.duckdns.org`, you set `SUBDOMAINS=user`. You would NOT set a sub subdomain like `overseerr` from `overseerr.user.ducksdns.org`.
-- It will update your IP with the DuckDNS service every 5 minutes (with a random jitter).
+- It will update your IP with the DuckDNS service at a configurable interval (default: every 5 minutes, with a random jitter). Use the `UPDATE_INTERVAL` environment variable to customize the update frequency.
 
 ## Notice regarding automatic detection
 
@@ -94,6 +94,7 @@ services:
       - SUBDOMAINS=subdomain1,subdomain2
       - TOKEN=token
       - UPDATE_IP=ipv4 #optional
+      - UPDATE_INTERVAL=5m #optional
       - LOG_FILE=false #optional
     volumes:
       - /path/to/duckdns/config:/config #optional
@@ -112,6 +113,7 @@ docker run -d \
   -e SUBDOMAINS=subdomain1,subdomain2 \
   -e TOKEN=token \
   -e UPDATE_IP=ipv4 `#optional` \
+  -e UPDATE_INTERVAL=5m `#optional` \
   -e LOG_FILE=false `#optional` \
   -v /path/to/duckdns/config:/config `#optional` \
   --restart unless-stopped \
@@ -131,6 +133,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 | `-e SUBDOMAINS=subdomain1,subdomain2` | multiple subdomains allowed, comma separated, no spaces, if your domain is user.duckdns.org you put user, not a sub-subdomain |
 | `-e TOKEN=token` | DuckDNS token |
 | `-e UPDATE_IP=ipv4` | Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection). Omitting this variable uses DuckDNS for detection and only supports IPv4. `both` and `ipv6` modes needs [host networking](#networking-net). |
+| `-e UPDATE_INTERVAL=5m` | Set the update interval. Format: `[number][m|h]` where `m` is minutes (5-60) or `h` is hours (1-24). Examples: `5m` (every 5 minutes), `30m` (every 30 minutes), `2h` (every 2 hours). Default is `5m`. |
 | `-e LOG_FILE=false` | Set to `true` to log to file (also need to map /config). |
 | `-v /config` | Persistent config files. Also set `LOG_FILE=true` to keep address history. |
 | `--read-only=true` | Run container with a read-only filesystem. Please [read the docs](https://docs.linuxserver.io/misc/read-only/). |
@@ -299,6 +302,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **18.02.26:** - Add configurable update interval via UPDATE_INTERVAL environment variable.
 * **27.07.25:** - Rebase to Alpine 3.22.
 * **27.01.25:** - Rebase to Alpine 3.21.
 * **24.06.24:** - Rebase to Alpine 3.20.
