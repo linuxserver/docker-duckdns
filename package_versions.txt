@@ -26,7 +26,7 @@ jq                      1.8.2-r0          apk
 json-c                  0.18-r1           apk     
 keyutils-libs           1.6.3-r4          apk     
 krb5-conf               1.0-r2            apk     
-krb5-libs               1.22.2-r1         apk     
+krb5-libs               1.22.3-r0         apk     
 libapk                  3.0.9-r0          apk     
 libattr                 2.5.2-r2          apk     
 libbsd                  0.12.2-r0         apk     
