@@ -40,8 +40,11 @@ app_setup_block: |
 
   ## Notice regarding automatic detection
 
-  Using the `UPDATE_IP` variable whatever its value (`ipv4`, `ipv6` or `both`) uses external *Cloudflare whoami* service to detect public IP addresses.
+  Using the `UPDATE_IP` variable queries external services to detect public IP addresses.
   **Be aware that using this variable will query a third-party service other than DuckDNS.**
+
+  - IPv4 detection uses `api.ipify.org` over a native IPv4 connection.
+  - IPv6 detection uses `api6.ipify.org` over a native IPv6 connection. If no IPv6 connectivity is available, the IPv6 update is skipped gracefully.
 
   Omitting the `UPDATE_IP` variable uses DuckDNS for detection and only supports IPv4.
 # init diagram
@@ -85,6 +88,7 @@ init_diagram: |
   "duckdns:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "21.11.26:", desc: "Fix IPv6 detection: replace broken Cloudflare Chaos DNS lookup with curl to api.ipify.org (IPv4) and api6.ipify.org (IPv6), with strict validation and graceful fallback when IPv6 is unavailable."}
   - {date: "15.07.26:", desc: "Rebase to Alpine 3.24."}
   - {date: "27.07.25:", desc: "Rebase to Alpine 3.22."}
   - {date: "27.01.25:", desc: "Rebase to Alpine 3.21."}
